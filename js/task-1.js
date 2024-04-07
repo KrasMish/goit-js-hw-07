@@ -1,45 +1,17 @@
-// Задача 1. Замовлення дроїдів
-// INFO
-// Виконуй це завдання у файлі task-1.js
+// З використанням властивостей і методів DOM-елементів, напиши скрипт, який:
 
-// Станція з продажу ремонтних дроїдів готова до запуску, залишилося написати програмне забезпечення для відділу продажів. 
-// Оголоси функцію makeTransaction(quantity, pricePerDroid, customerCredits), яка складає та повертає повідомлення про купівлю 
-// ремонтних дроїдів.
+// Порахує й виведе в консоль кількість категорій в ul#categories, тобто елементів li.item.
+// Для кожного елемента li.item у списку ul#categories знайде й виведе в консоль текст заголовка елемента
+//     (тегу < h2 >) і кількість елементів у категорії(усіх < li >, вкладених у нього).
 
-// Вона оголошує три параметри, значення яких будуть задаватися під час її виклику:
+const list = document.querySelector("#categories");
 
-// quantity — кількість замовлених дроїдів
-// pricePerDroid — ціна одного дроїда
-// customerCredits — сума коштів на рахунку клієнта
-// Доповни функцію таким чином:
+const items = [...list.children];
 
-// Оголоси змінну для зберігання загальної суми замовлення(загальна вартість усіх замовлених дроїдів)
-// і задай їй вираз розрахунку цієї суми.
-// Додай перевірку, чи зможе клієнт оплатити замовлення:
-// якщо сума до сплати перевищує кількість кредитів на рахунку клієнта, функція має повертати рядок "Insufficient funds!"
-// в іншому випадку функція має повертати рядок "You ordered <quantity> droids worth <totalPrice> credits!", де < quantity >
-//     це кількість замовлених дроїдів, а < totalPrice > це їх загальна вартість.
-// Візьми код нижче і встав після оголошення своєї функції для перевірки коректності її роботи.У консоль будуть виведені
-// результати її роботи.
+console.log(`Number of categories: ${items.length}`);
 
-function makeTransaction(quantity, pricePerDroid, customerCredits)
-{
-    let Sum = 0;
-    Sum = quantity * pricePerDroid;
-    if (customerCredits >= Sum) {
-        return `You ordered ${quantity} droids worth ${Sum} credits!`
-    }
-    else return "Insufficient funds!";
-}
+items.forEach((item) => {
+  console.log(`category: ${item.querySelector("h2").textContent}`);
 
-
-
-
-console.log(makeTransaction(5, 3000, 23000)); // "You ordered 5 droids worth 15000 credits!"
-console.log(makeTransaction(3, 1000, 15000)); // "You ordered 3 droids worth 3000 credits!"
-console.log(makeTransaction(10, 5000, 8000)); // "Insufficient funds!"
-console.log(makeTransaction(8, 2000, 10000)); // "Insufficient funds!"
-console.log(makeTransaction(10, 500, 5000)); // "You ordered 10 droids worth 5000 credits!"
-
-
-
+  console.log(`Elements: ${item.querySelector("ul").children.length}`);
+});

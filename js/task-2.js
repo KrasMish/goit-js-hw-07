@@ -1,30 +1,39 @@
-// Задача 2. Форматування повідомлення
-// ВИКОНУЙ ЦЕ ЗАВДАННЯ У ФАЙЛІ task-2.js
-// Оголоси функцію formatMessage(message, maxLength), яка приймає рядок(параметр message) та перевіряє його довжину
-//  відповідно до заданої максимальної довжини(параметр maxLength).
+// Використовуй масив об'єктів images для створення елементів <img>, вкладених в <li>.
 
-// Доповни код функції таким чином, що:
+// Ти можеш створити й додати HTML - елементи, використовуючи document.createElement() і elem.append() 
+// або шаблонні рядки і elem.insertAdjacentHTML().
 
-// Якщо довжина рядка дорівнює або менша за maxLength, то функція повертає початковий рядок без змін.
-// Якщо довжина перевищує maxLength, то функція обрізає рядок до maxLength символів, додає трикрапку "..." в кінці
-// та повертає обрізану версію.
-// Візьми код нижче і встав після оголошення своєї функції для перевірки коректності її роботи.У консоль будуть виведені
-// результати її роботи.
-
-
-function formatMessage(message, maxLength)
-{
-    if (message.length <= maxLength) return message;
-    else return `${message.slice(0, maxLength)}...`;
-}
+// Усі елементи галереї повинні додаватися в DOM за одну операцію додавання.
+// Додай мінімальне оформлення галереї флексбоксами через CSS класи.
 
 
 
-console.log(formatMessage("Curabitur ligula sapien", 16)); // "Curabitur ligula..."
-console.log(formatMessage("Curabitur ligula sapien", 23)); // "Curabitur ligula sapien"
-console.log(formatMessage("Vestibulum facilisis purus nec", 20)); // "Vestibulum facilisis..."
-console.log(formatMessage("Vestibulum facilisis purus nec", 30)); // "Vestibulum facilisis purus nec"
-console.log(formatMessage("Nunc sed turpis a felis in nunc fringilla", 15)); // "Nunc sed turpis..."
-console.log(formatMessage("Nunc sed turpis a felis in nunc fringilla", 41)); // "Nunc sed turpis a felis in nunc fringilla"
+const images = [
+  {
+    url: "https://images.pexels.com/photos/140134/pexels-photo-140134.jpeg?dpr=2&h=750&w=1260",
+    alt: "White and Black Long Fur Cat",
+  },
+  {
+    url: "https://images.pexels.com/photos/213399/pexels-photo-213399.jpeg?dpr=2&h=750&w=1260",
+    alt: "Orange and White Koi Fish Near Yellow Koi Fish",
+  },
+  {
+    url: "https://images.pexels.com/photos/219943/pexels-photo-219943.jpeg?dpr=2&h=750&w=1260",
+    alt: "Group of Horses Running",
+  },
+];
+const gallery = document.querySelector(".gallery");
 
+const galleryItems = images.map((image) => {
+  const listItem = document.createElement("li");
+  listItem.classList.add("gallery-item");
 
+  const img = document.createElement("img");
+  img.src = image.url;
+  img.alt = image.alt;
+
+  listItem.appendChild(img);
+  return listItem;
+});
+
+gallery.append(...galleryItems);

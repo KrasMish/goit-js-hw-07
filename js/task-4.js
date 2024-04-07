@@ -1,44 +1,35 @@
-// Задача 4. Доставка товару
-// ВИКОНУЙ ЦЕ ЗАВДАННЯ У ФАЙЛІ task-4.js
-// Оголоси функцію getShippingCost(country), яка повинна перевіряти можливість доставки товару в країну користувача
-//     (параметр country) і повертати повідомлення про результат.Обов'язково використовуй інструкцію switch.
-
-// Формат рядка, що повертається "Shipping to <country> will cost <price> credits", де замість < country > і < price >
-//     необхідно підставити відповідні значення.
-
-// Список країн і вартість доставки:
-
-// China — 100 кредитів
-// Chile — 250 кредитів
-// Australia — 170 кредитів
-// Jamaica — 120 кредитів
-// Зі списку видно, що доставка можлива не скрізь.Якщо зазначена країна відсутня у списку, то функція повинна повернути
-// рядок "Sorry, there is no delivery to your country".
-
-// Візьми код нижче і встав після оголошення своєї функції для перевірки коректності її роботи.У консоль будуть виведені
-// результати її роботи.
-
-function getShippingCost(country) {
-    let price = 0;
-    switch (country) {
-        case "China": price = 100; break;
-        case "Chile": price = 250; break;
-        case "Australia": price = 170; break;
-        case "Jamaica": price = 120; break;
-        default: return "Sorry, there is no delivery to your country";
-    }
-    return `Shipping to ${country} will cost ${price} credits`;
-}
+// відправлення форми form.login-form повинна відбуватися за подією submit.
+// Під час відправлення форми сторінка не повинна перезавантажуватися.
+// Якщо при сабміті у формі є незаповнені поля, виводь alert з попередженням про те,
+//     що 'All form fields must be filled in'.Не додавай на інпути атрибут required, валідація має відбуватися саме через JS.
+// Якщо користувач заповнив усі поля і відправив форму, збери значення полів в об'єкт з двома 
+// властивостями, де ключ — це ім'я інпутів, а значення — відповідні значення цих інпутів, очищені
+// від пробілів по краях.Для доступу до елементів форми використовуй властивість elements.
+// При сабміті форми виведи об'єкт із введеними даними в консоль і очисти значення полів форми методом reset.
 
 
+const loginForm = document.querySelector(".login-form");
 
+loginForm.addEventListener("submit", function (event) {
+  event.preventDefault();
 
+  const emailInput = loginForm.elements.email;
+  const passwordInput = loginForm.elements.password;
 
+  const emailValue = emailInput.value.trim();
+  const passwordValue = passwordInput.value.trim();
 
-console.log(getShippingCost("Australia")); // "Shipping to Australia will cost 170 credits"
-console.log(getShippingCost("Germany")); // "Sorry, there is no delivery to your country"
-console.log(getShippingCost("China")); // "Shipping to China will cost 100 credits"
-console.log(getShippingCost("Chile")); // "Shipping to Chile will cost 250 credits"
-console.log(getShippingCost("Jamaica")); // "Shipping to Jamaica will cost 120 credits"
-console.log(getShippingCost("Sweden")); // "Sorry, there is no delivery to your country"
+  if (!emailValue || !passwordValue) {
+    alert("All form fields must be filled in");
+    return;
+  }
 
+  const formData = {
+    email: emailValue,
+    password: passwordValue,
+  };
+
+  console.log(formData);
+
+  loginForm.reset();
+});
